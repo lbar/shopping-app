@@ -1,0 +1,21 @@
+<div id="element-list">
+
+	<ul>
+		<li ng-repeat="element in elements">
+			<span class="normal-mode">
+				<span class="element-amount">{{element.amount}}</span> -
+				<span class="element-name">{{element.name}}</span>
+			</span>
+			<span class="edit-mode">
+				<label for="element-name">Name:</label>
+				<input type="text" id="add-element-name" ng-model="element.name"/>
+				
+				<label for="element-amount">Amount:</label>
+				<input type="text" id="add-element-amount" ng-model="element.amount"/>
+			</span>
+			<button class="element-button" ng-click="updateElement(element)">Edit</button>
+			<button class="element-button" ng-click="deleteElement(element)">Delete</button>
+		</li>
+	</ul>
+	
+</div>

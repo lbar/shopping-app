@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app="shopping-app">
+	<head>
+		<title>Shopping</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="Shopping sample application with Spring for server-side and Angular.js for client-side" />
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+		
+		<script src="http://code.jquery.com/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+		<script src="lib/angular-1.0.1.js"></script>
+		<script src="lib/angular-resource-1.0.1.js"></script>
+		
+		<script src="js/controllers.js"></script>
+		<script src="js/services.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<h1>Shopping list</h1>
+			
+			<div id="list">
+				<div ng-view></div>
+			</div>
+
+		</div>
+	</body>
+</html>
