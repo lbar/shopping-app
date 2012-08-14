@@ -7,11 +7,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import fr.kage.samples.shopping.dao.ShoppingService;
 import fr.kage.samples.shopping.model.Element;
@@ -35,16 +37,19 @@ public class ShoppingController {
 	}
 	
 	@RequestMapping(value="/element", method=POST)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void add(@RequestBody Element element) {
 		shoppingService.addElement(element);
 	}
 	
 	@RequestMapping(value="/element/{id}", method=PUT)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void edit(@PathVariable long id, @RequestBody Element element) {
 		shoppingService.updateElement(id, element);
 	}
 	
 	@RequestMapping(value="/element/{id}", method=DELETE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable long id) {
 		shoppingService.deleteElement(id);
 	}
