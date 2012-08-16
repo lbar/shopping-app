@@ -49,8 +49,8 @@ public class ShoppingControllerTest {
 			assertFalse(second.isEmpty());
 			assertEquals(2, second.size());
 			
-			assertEquals(1, second.get(0).getId());
-			assertEquals(2, second.get(1).getId());
+			assertEquals(1, (long) second.get(0).getId());
+			assertEquals(2, (long) second.get(1).getId());
 		}
 	}
 	

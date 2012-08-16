@@ -18,11 +18,19 @@ public class ShoppingInMemoryDAO implements ShoppingDAO {
 	}
 
 	@Override
-	public void addElement(Element element) { // FIXME auto-generation of id
-		if (elements.containsKey(element.getId()))
-			throw new ShoppingDAOException("Error: try to update a non-existent element with id <" + element.getId() + ">");
+	public void addElement(Element element) {
+		if (element.getId() != null)
+			throw new ShoppingDAOException("Error: try to insert a element with id <" + element.getId() + ">");
 		
+		element.setId(nextId());
 		elements.put(element.getId(), element);
+	}
+
+	private Long nextId() {
+		long max = 0;
+		for (Long currentId : elements.keySet())
+			max = Math.max(max, currentId);
+		return max + 1;
 	}
 
 	@Override
