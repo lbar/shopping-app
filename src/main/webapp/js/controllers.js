@@ -8,13 +8,33 @@ angular.module("shopping-app", ["shoppingService"])
 	}]);
 
 var ElementController = {
-	list: function($scope, $location, Element) {
+	list: function($scope, $location, $rootElement, Element) {
 		$scope.elements = Element.query();
-		$scope.newElement = function() {
-			$("add-element").show();
-		}
-		$scope.updateElement = function(element) {
-			$location.path("/element/modify");
+		$scope.editedElement = null;
+		
+		$scope.addElement = function() {
+			Element.create($scope.newElement, function() {
+				$scope.elements = Element.query();
+			});
+			$scope.newElement = null;
+		};
+		
+		$scope.enableEditingMode = function(element) {
+			if ($scope.editedElement != null)
+				$scope.saveElement($scope.editedElement);
+			$scope.editedElement = element;
+		};
+		
+		$scope.saveElement = function(element) {
+			element.$save({id: element.id});
+			$scope.editedElement = null;
+		};
+		
+		$scope.deleteElement = function(element) {
+			if (confirm("The element " + element.name + " will be deleted. Are you sure?"))
+				element.$delete({id: element.id}, function() {
+					$scope.elements = Element.query();
+				});
 		}
 	},
 	

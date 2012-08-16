@@ -1,20 +1,29 @@
 <div id="element-list">
 
 	<ul>
+		<li>
+			<form ng-submit="addElement(newElement)" class="form-element">
+				<input type="text" placeholder="Name" ng-model="newElement.name"/>
+				<input type="number" placeholder="Amount" ng-model="newElement.amount"/>
+				<button class="element-button" type="submit">+</button>
+			</form>
+		</li>
 		<li ng-repeat="element in elements">
-			<span class="normal-mode">
-				<span class="element-amount">{{element.amount}}</span> -
-				<span class="element-name">{{element.name}}</span>
-			</span>
-			<span class="edit-mode">
-				<label for="element-name">Name:</label>
-				<input type="text" id="add-element-name" ng-model="element.name"/>
+			<div class="normal-mode" ng-hide="element == editedElement">
+				<label for="element-amount">{{element.amount}}</label> -
+				<label for="element-name">{{element.name}}</label>
 				
-				<label for="element-amount">Amount:</label>
-				<input type="text" id="add-element-amount" ng-model="element.amount"/>
-			</span>
-			<button class="element-button" ng-click="updateElement(element)">Edit</button>
-			<button class="element-button" ng-click="deleteElement(element)">Delete</button>
+				<button class="element-button" ng-click="enableEditingMode(element)">Edit</button>
+				<button class="element-button" ng-click="deleteElement(element)">Delete</button>
+			</div>
+			<form ng-submit="saveElement(element)" class="form-element">
+				<div class="edit-mode" ng-show="element == editedElement">
+					<input type="text" id="element-name" placeholder="Name" ng-model="element.name"/>
+					<input type="number" id="element-amount" placeholder="Amount" ng-model="element.amount"/>
+					
+					<button class="element-button" type="submit">Save</button>
+				</div>
+			</form>
 		</li>
 	</ul>
 	

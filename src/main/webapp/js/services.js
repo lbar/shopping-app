@@ -2,7 +2,8 @@
 
 angular.module("shoppingService", ["ngResource"])
         .factory('Element', function ($resource) {
-            return $resource('api/element/:id', {}, {
-                'save': {method:'PUT'}
+            return $resource("api/element/:id", {}, {
+            	"create": {method: "POST"},
+                "save": {method:"PUT"}
             });
         });
