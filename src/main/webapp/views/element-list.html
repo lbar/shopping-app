@@ -1,41 +1,42 @@
 <div>
 
-	<ul class="category-list">
-		<li>
-			<form ng-submit="addCategory(newCategory)" class="form-category">
-				<input type="text" placeholder="Category name" ng-model="newCategory.name"/>
-				<button class="category-button" type="submit">+</button>
-			</form>
-		</li>
+	<ul class="category-list unstyled span6">
 		<li ng-repeat="category in categories" ng-controller="CategoryController">
-			<h6>{{category.name}}</h6>
-			<aside><button ng-click="deleteCategory(category)">Delete</button></aside>
-			<ul class="element-list">
-				<li>
-					<form ng-submit="addElementInCategory(category)" class="form-element">
-						<input type="text" placeholder="Name" ng-model="newElement.name"/>
-						<input type="number" placeholder="Amount" ng-model="newElement.amount"/>
-						<button class="element-button" type="submit">+</button>
-					</form>
-				</li>
+			<aside class="pull-right"><button ng-click="deleteCategory(category)" class="btn-small category-btn"><i class="icon-remove"></i>Delete</button></aside>
+			<h3>{{category.name}}</h3>
+			<ul class="element-list unstyled">
 				<li ng-repeat="element in elements | filterElementsInCategory:category" ng-controller="ElementController">
-					<div class="normal-mode" ng-hide="element == editedElement">
-						<label for="element-{{element.id}}-amount">{{element.amount}}</label> -
-						<label for="element-{{element.id}}-name">{{element.name}}</label>
+					<div ng-hide="element == editedElement">
+						<label for="element-{{element.id}}-amount" class="inline badge">{{element.amount}}</label>
+						<label for="element-{{element.id}}-name" class="inline">{{element.name}}</label>
 						
-						<button class="element-button" ng-click="enableEditingMode(element)">Edit</button>
-						<button class="element-button" ng-click="deleteElement(element)">Delete</button>
+						<button class="btn-small pull-right element-btn" ng-click="enableEditingMode(element)"><i class="icon-edit"></i>Edit</button>
+						<button class="btn-small pull-right element-btn" ng-click="deleteElement(element)"><i class="icon-remove"></i>Delete</button>
 					</div>
-					<form ng-submit="saveElement(element)" class="form-element">
-						<div class="edit-mode" ng-show="element == editedElement">
-							<input type="text" id="element-{{element.id}}-name" placeholder="Name" ng-model="element.name"/>
-							<input type="number" id="element-{{element.id}}-amount" placeholder="Amount" ng-model="element.amount"/>
+					<form ng-submit="saveElement(element)" class="form-horizontal" ng-show="element == editedElement">
+						<div>
+							<input type="text" id="element-{{element.id}}-name" placeholder="Name" ng-model="element.name" class="span3"/>
+							<input type="number" id="element-{{element.id}}-amount" placeholder="Amount" ng-model="element.amount" class="span2"/>
 							
-							<button class="element-button" type="submit">Save</button>
+							<button class="btn-small pull-right element-btn" type="submit"><i class="icon-ok-circle"></i>Save</button>
 						</div>
 					</form>
 				</li>
+				<li>
+					<form ng-submit="addElementInCategory(category)" class="form-horizontal">
+						<input type="text" placeholder="New element name" ng-model="newElement.name" class="span3"/>
+						<input type="number" placeholder="Amount" ng-model="newElement.amount" class="span2"/>
+						<button class="btn-small pull-right element-btn" type="submit"><i class="icon-plus"></i></button>
+					</form>
+				</li>
 			</ul>
+		</li>
+		<li>
+			<h3>New category</h3>
+			<form ng-submit="addCategory(newCategory)" class="form-horizontal">
+				<input type="text" placeholder="New category name" ng-model="newCategory.name" class="span3"/>
+				<button class="btn-small pull-right category-btn" type="submit"><i class="icon-plus"></i></button>
+			</form>
 		</li>
 	</ul>
 	

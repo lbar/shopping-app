@@ -3,24 +3,48 @@
 	<head>
 		<title>Shopping</title>
 		<meta charset="utf-8" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Shopping sample application with Spring for server-side and Angular.js for client-side" />
 		<link rel="stylesheet" type="text/css" href="main.css"/>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.css"/>
 		
 		<script src="http://code.jquery.com/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
 		<script src="lib/angular-1.0.1.js"></script>
 		<script src="lib/angular-resource-1.0.1.js"></script>
+		<script src="bootstrap/js/bootstrap.js"></script>
 		
 		<script src="js/controllers.js"></script>
 		<script src="js/services.js"></script>
 	</head>
 	<body>
-		<header>
-			<h1>Shopping list</h1>
+		<header class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		            	<span class="icon-bar"></span>
+		            	<span class="icon-bar"></span>
+		          	</a>
+					<a class="brand" href="#/"><h1>Shopping list</h1></a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li class="active"><a href="#/"><i class="icon-white icon-list-alt"></i> List</a></li>
+							<li><a href="#/about"><i class="icon-white icon-question-sign"></i> About</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</header>
 		
-		<section id="list" ng-view>
+		<section class="container" ng-view>
 			
 		</section>
+		
+		<footer class="page-footer">
+			<div class="container">
+				See <a href="#/about">About</a> for information about this app.
+			</div>
+		</footer>
 	</body>
 </html>
