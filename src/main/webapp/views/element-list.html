@@ -1,29 +1,41 @@
-<div id="element-list">
+<div>
 
-	<ul>
+	<ul class="category-list">
 		<li>
-			<form ng-submit="addElement(newElement)" class="form-element">
-				<input type="text" placeholder="Name" ng-model="newElement.name"/>
-				<input type="number" placeholder="Amount" ng-model="newElement.amount"/>
-				<button class="element-button" type="submit">+</button>
+			<form ng-submit="addCategory(newCategory)" class="form-category">
+				<input type="text" placeholder="Category name" ng-model="newCategory.name"/>
+				<button class="category-button" type="submit">+</button>
 			</form>
 		</li>
-		<li ng-repeat="element in elements">
-			<div class="normal-mode" ng-hide="element == editedElement">
-				<label for="element-amount">{{element.amount}}</label> -
-				<label for="element-name">{{element.name}}</label>
-				
-				<button class="element-button" ng-click="enableEditingMode(element)">Edit</button>
-				<button class="element-button" ng-click="deleteElement(element)">Delete</button>
-			</div>
-			<form ng-submit="saveElement(element)" class="form-element">
-				<div class="edit-mode" ng-show="element == editedElement">
-					<input type="text" id="element-name" placeholder="Name" ng-model="element.name"/>
-					<input type="number" id="element-amount" placeholder="Amount" ng-model="element.amount"/>
-					
-					<button class="element-button" type="submit">Save</button>
-				</div>
-			</form>
+		<li ng-repeat="category in categories" ng-controller="CategoryController">
+			<h6>{{category.name}}</h6>
+			<aside><button ng-click="deleteCategory(category)">Delete</button></aside>
+			<ul class="element-list">
+				<li>
+					<form ng-submit="addElementInCategory(category)" class="form-element">
+						<input type="text" placeholder="Name" ng-model="newElement.name"/>
+						<input type="number" placeholder="Amount" ng-model="newElement.amount"/>
+						<button class="element-button" type="submit">+</button>
+					</form>
+				</li>
+				<li ng-repeat="element in elements | filterElementsInCategory:category" ng-controller="ElementController">
+					<div class="normal-mode" ng-hide="element == editedElement">
+						<label for="element-{{element.id}}-amount">{{element.amount}}</label> -
+						<label for="element-{{element.id}}-name">{{element.name}}</label>
+						
+						<button class="element-button" ng-click="enableEditingMode(element)">Edit</button>
+						<button class="element-button" ng-click="deleteElement(element)">Delete</button>
+					</div>
+					<form ng-submit="saveElement(element)" class="form-element">
+						<div class="edit-mode" ng-show="element == editedElement">
+							<input type="text" id="element-{{element.id}}-name" placeholder="Name" ng-model="element.name"/>
+							<input type="number" id="element-{{element.id}}-amount" placeholder="Amount" ng-model="element.amount"/>
+							
+							<button class="element-button" type="submit">Save</button>
+						</div>
+					</form>
+				</li>
+			</ul>
 		</li>
 	</ul>
 	
