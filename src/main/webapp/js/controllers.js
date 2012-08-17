@@ -4,6 +4,7 @@ angular.module("shopping-app", ["shoppingService"])
 	.config(["$routeProvider", function ($routeProvider) {
 	    $routeProvider
 	            .when("/element/list", {templateUrl:"views/element-list.html", controller:MainController})
+	            .when("/about", {templateUrl:"views/about.html", controller:AboutController})
 	            .otherwise({redirectTo:"/element/list"});
 	}])
 	.filter("filterElementsInCategory", function() {
@@ -71,4 +72,8 @@ var CategoryController = function($scope, Category, Element) {
 
 var ElementController = function($scope, Category, Element) {
 	
+}
+
+var AboutController = function($scope) {
+	// nothing to do
 }
