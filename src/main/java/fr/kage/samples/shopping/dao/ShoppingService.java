@@ -2,6 +2,7 @@ package fr.kage.samples.shopping.dao;
 
 import java.util.List;
 
+import fr.kage.samples.shopping.model.Category;
 import fr.kage.samples.shopping.model.Element;
 
 public class ShoppingService {
@@ -30,5 +31,21 @@ public class ShoppingService {
 	
 	public void deleteElement(long id) {
 		shoppingDAO.deleteElement(id);
+	}
+	
+	public List<Category> listCategories() {
+		return shoppingDAO.listCategories();
+	}
+	
+	public void addCategory(Category category) {
+		shoppingDAO.addCategory(category);
+	}
+	
+	public void updateCategory(long id, Category category) {
+		shoppingDAO.updateCategory(id, category);
+	}
+	
+	public void deleteCategory(long id) {
+		shoppingDAO.deleteCategory(id);
 	}
 }
