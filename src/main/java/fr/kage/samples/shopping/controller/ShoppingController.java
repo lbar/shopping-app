@@ -7,6 +7,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,11 +24,8 @@ import fr.kage.samples.shopping.model.Element;
 @Controller
 public class ShoppingController {
 	
+	@Resource(name="shoppingService")
 	private ShoppingService shoppingService;
-
-	public ShoppingService getShoppingService() {
-		return shoppingService;
-	}
 
 	public void setShoppingService(ShoppingService shoppingService) {
 		this.shoppingService = shoppingService;

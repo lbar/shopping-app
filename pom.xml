@@ -67,6 +67,26 @@
             <version>${version.spring}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${version.spring}</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.hibernate</groupId>
+        	<artifactId>hibernate-annotations</artifactId>
+        	<version>3.5.6-Final</version>
+        </dependency>
+        <dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+           <groupId>javassist</groupId>
+           <artifactId>javassist</artifactId>
+           <version>3.4.GA</version>
+       	</dependency>
+        <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
             <version>${version.jackson}</version>
@@ -77,10 +97,25 @@
             <version>${version.jackson}</version>
         </dependency>
         <dependency>
+        	<groupId>hsqldb</groupId>
+        	<artifactId>hsqldb</artifactId>
+        	<version>1.8.0.10</version>
+        </dependency>
+        <dependency>
         	<groupId>com.google.guava</groupId>
         	<artifactId>guava</artifactId>
         	<version>13.0</version>
-        	<scope>test</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.slf4j</groupId>
+        	<artifactId>slf4j-jcl</artifactId>
+        	<version>1.5.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${version.spring}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
         	<groupId>junit</groupId>
@@ -94,6 +129,13 @@
         	<version>1.9.0</version>
         	<scope>test</scope>
         </dependency>
+        <dependency>
+        	<groupId>javax.servlet</groupId>
+        	<artifactId>servlet-api</artifactId>
+        	<version>3.0-alpha-1</version>
+        	<scope>test</scope>
+        </dependency>
+        
     </dependencies>
 
     <!-- Build plugins setup -->

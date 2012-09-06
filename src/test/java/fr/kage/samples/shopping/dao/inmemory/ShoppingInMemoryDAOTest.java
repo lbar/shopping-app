@@ -35,8 +35,8 @@ public class ShoppingInMemoryDAOTest {
 			assertTrue(first.isEmpty());
 		}
 		{
-			shoppingInMemoryDAO.addElement(newElement(1));
-			shoppingInMemoryDAO.addElement(newElement(2));
+			shoppingInMemoryDAO.addElement(newElement());
+			shoppingInMemoryDAO.addElement(newElement());
 			
 			List<Element> second = shoppingInMemoryDAO.listElements();
 			assertFalse(second.isEmpty());
@@ -48,7 +48,7 @@ public class ShoppingInMemoryDAOTest {
 	public void testAddElement() {
 		assertTrue(shoppingInMemoryDAO.listElements().isEmpty());
 		{
-			Element added = newElement(1);
+			Element added = newElement();
 			shoppingInMemoryDAO.addElement(added);
 			assertEquals(added, shoppingInMemoryDAO.listElements().get(0));
 		}
@@ -56,11 +56,11 @@ public class ShoppingInMemoryDAOTest {
 	
 	@Test
 	public void testEditElement() {
-		Element added = newElement(1);
+		Element added = newElement();
 		shoppingInMemoryDAO.addElement(added);
 		assertEquals(added, shoppingInMemoryDAO.listElements().get(0));
 		
-		Element modified = newElement(1);
+		Element modified = newElement();
 		assertNotSame(modified, added);
 		shoppingInMemoryDAO.updateElement(1, modified);
 		assertEquals(modified, shoppingInMemoryDAO.listElements().get(0));
@@ -68,7 +68,7 @@ public class ShoppingInMemoryDAOTest {
 	
 	@Test
 	public void testDeleteElement() {
-		Element added = newElement(1);
+		Element added = newElement();
 		shoppingInMemoryDAO.addElement(added);
 		assertEquals(added, shoppingInMemoryDAO.listElements().get(0));
 		
@@ -76,7 +76,7 @@ public class ShoppingInMemoryDAOTest {
 		assertTrue(shoppingInMemoryDAO.listElements().isEmpty());
 	}
 	
-	static Element newElement(long id) {
+	static Element newElement() {
 		final Element mocked = mock(Element.class);
 		doAnswer(new Answer<Void>() {
 			@Override

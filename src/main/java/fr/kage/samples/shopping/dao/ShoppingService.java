@@ -2,21 +2,19 @@ package fr.kage.samples.shopping.dao;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import fr.kage.samples.shopping.model.Category;
 import fr.kage.samples.shopping.model.Element;
 
+@Service("shoppingService")
 public class ShoppingService {
 	
+	@Resource(name="shoppingDAO")
 	private ShoppingDAO shoppingDAO;
 	
-	public ShoppingDAO getShoppingDAO() {
-		return shoppingDAO;
-	}
-
-	public void setShoppingDAO(ShoppingDAO shoppingDAO) {
-		this.shoppingDAO = shoppingDAO;
-	}
-
 	public List<Element> listElements() {
 		return shoppingDAO.listElements();
 	}
