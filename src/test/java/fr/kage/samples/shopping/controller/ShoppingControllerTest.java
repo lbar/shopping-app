@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableList;
 
 import fr.kage.samples.shopping.dao.ShoppingService;
 import fr.kage.samples.shopping.model.Category;
-import fr.kage.samples.shopping.model.Element;
+import fr.kage.samples.shopping.model.Product;
 
 public class ShoppingControllerTest {
 
@@ -36,17 +36,17 @@ public class ShoppingControllerTest {
 	}
 	
 	@Test
-	public void testListElements() {
+	public void testListProducts() {
 		{
-			doReturn(new ArrayList<Element>()).when(mockedShoppingService).listElements();
+			doReturn(new ArrayList<Product>()).when(mockedShoppingService).listProducts();
 			
-			List<Element> first = shoppingController.listElements();
+			List<Product> first = shoppingController.listProducts();
 			assertTrue(first.isEmpty());
 		}
 		{
-			doReturn(ImmutableList.of(newElement(1), newElement(2))).when(mockedShoppingService).listElements();
+			doReturn(ImmutableList.of(newProduct(1), newProduct(2))).when(mockedShoppingService).listProducts();
 			
-			List<Element> second = shoppingController.listElements();
+			List<Product> second = shoppingController.listProducts();
 			assertFalse(second.isEmpty());
 			assertEquals(2, second.size());
 			
@@ -56,33 +56,33 @@ public class ShoppingControllerTest {
 	}
 	
 	@Test
-	public void testAddElement() {
-		Element added = newElement(1);
-		verify(mockedShoppingService, never()).addElement(added);
+	public void testAddProduct() {
+		Product added = newProduct(1);
+		verify(mockedShoppingService, never()).addProduct(added);
 
-		shoppingController.addElement(added);
-		verify(mockedShoppingService, times(1)).addElement(added);
+		shoppingController.addProduct(added);
+		verify(mockedShoppingService, times(1)).addProduct(added);
 	}
 	
 	@Test
-	public void testEditElement() {
-		Element modified = newElement(1);
-		verify(mockedShoppingService, never()).updateElement(1, modified);
+	public void testEditProduct() {
+		Product modified = newProduct(1);
+		verify(mockedShoppingService, never()).updateProduct(1, modified);
 		
-		shoppingController.editElement(1, modified);
-		verify(mockedShoppingService, times(1)).updateElement(1, modified);
+		shoppingController.editProduct(1, modified);
+		verify(mockedShoppingService, times(1)).updateProduct(1, modified);
 	}
 	
 	@Test
-	public void testDeleteElement() {
-		verify(mockedShoppingService, never()).deleteElement(1);
+	public void testDeleteProduct() {
+		verify(mockedShoppingService, never()).deleteProduct(1);
 		
-		shoppingController.deleteElement(1);
-		verify(mockedShoppingService, times(1)).deleteElement(1);
+		shoppingController.deleteProduct(1);
+		verify(mockedShoppingService, times(1)).deleteProduct(1);
 	}
 	
-	static Element newElement(long id) {
-		Element mocked = mock(Element.class);
+	static Product newProduct(long id) {
+		Product mocked = mock(Product.class);
 		when(mocked.getId()).thenReturn(id);
 		return mocked;
 	}

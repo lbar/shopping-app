@@ -3,17 +3,17 @@ package fr.kage.samples.shopping.dao;
 import java.util.List;
 
 import fr.kage.samples.shopping.model.Category;
-import fr.kage.samples.shopping.model.Element;
+import fr.kage.samples.shopping.model.Product;
 
 public interface ShoppingDAO {
 
-	List<Element> listElements();
+	List<Product> listProducts();
 	
-	void addElement(Element element);
+	void addProduct(Product product);
 	
-	void updateElement(long id, Element element);
+	void updateProduct(long id, Product product);
 	
-	void deleteElement(long id);
+	void deleteProduct(long id);
 	
 	List<Category> listCategories();
 	

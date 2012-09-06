@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import fr.kage.samples.shopping.dao.ShoppingService;
 import fr.kage.samples.shopping.model.Category;
-import fr.kage.samples.shopping.model.Element;
+import fr.kage.samples.shopping.model.Product;
 
 @Controller
 public class ShoppingController {
@@ -31,27 +31,27 @@ public class ShoppingController {
 		this.shoppingService = shoppingService;
 	}
 
-	@RequestMapping(value="/element", method=GET)
-	public @ResponseBody List<Element> listElements() {
-		return shoppingService.listElements();
+	@RequestMapping(value="/product", method=GET)
+	public @ResponseBody List<Product> listProducts() {
+		return shoppingService.listProducts();
 	}
 	
-	@RequestMapping(value="/element", method=POST)
+	@RequestMapping(value="/product", method=POST)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void addElement(@RequestBody Element element) {
-		shoppingService.addElement(element);
+	public void addProduct(@RequestBody Product product) {
+		shoppingService.addProduct(product);
 	}
 	
-	@RequestMapping(value="/element/{id}", method=PUT)
+	@RequestMapping(value="/product/{id}", method=PUT)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void editElement(@PathVariable long id, @RequestBody Element element) {
-		shoppingService.updateElement(id, element);
+	public void editProduct(@PathVariable long id, @RequestBody Product product) {
+		shoppingService.updateProduct(id, product);
 	}
 	
-	@RequestMapping(value="/element/{id}", method=DELETE)
+	@RequestMapping(value="/product/{id}", method=DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteElement(@PathVariable long id) {
-		shoppingService.deleteElement(id);
+	public void deleteProduct(@PathVariable long id) {
+		shoppingService.deleteProduct(id);
 	}
 	
 	@RequestMapping(value="/category", method=GET)

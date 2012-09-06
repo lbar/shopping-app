@@ -1,0 +1,43 @@
+<div>
+
+	<ul class="category-list unstyled span6">
+		<li ng-repeat="category in categories" ng-controller="CategoryController">
+			<aside class="pull-right"><button ng-click="deleteCategory(category)" class="btn-small category-btn"><i class="icon-remove"></i>Delete</button></aside>
+			<h3>{{category.name}}</h3>
+			<ul class="product-list unstyled">
+				<li ng-repeat="product in products | filterProductsInCategory:category" ng-controller="ProductController">
+					<div ng-hide="product == editedProduct">
+						<label for="product-{{product.id}}-amount" class="inline badge">{{product.amount}}</label>
+						<label for="product-{{product.id}}-name" class="inline">{{product.name}}</label>
+						
+						<button class="btn-small pull-right product-btn" ng-click="enableEditingMode(product)"><i class="icon-edit"></i>Edit</button>
+						<button class="btn-small pull-right product-btn" ng-click="deleteProduct(product)"><i class="icon-remove"></i>Delete</button>
+					</div>
+					<form ng-submit="saveProduct(product)" class="form-horizontal" ng-show="product == editedProduct">
+						<div>
+							<input type="text" id="product-{{product.id}}-name" placeholder="Name" ng-model="product.name" class="span3"/>
+							<input type="number" id="product-{{product.id}}-amount" placeholder="Amount" ng-model="product.amount" class="span2"/>
+							
+							<button class="btn-small pull-right product-btn" type="submit"><i class="icon-ok-circle"></i>Save</button>
+						</div>
+					</form>
+				</li>
+				<li>
+					<form ng-submit="addProductInCategory(category)" class="form-horizontal">
+						<input type="text" placeholder="New product name" ng-model="newProduct.name" class="span3"/>
+						<input type="number" placeholder="Amount" ng-model="newProduct.amount" class="span2"/>
+						<button class="btn-small pull-right product-btn" type="submit"><i class="icon-plus"></i></button>
+					</form>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<h3>New category</h3>
+			<form ng-submit="addCategory(newCategory)" class="form-horizontal">
+				<input type="text" placeholder="New category name" ng-model="newCategory.name" class="span3"/>
+				<button class="btn-small pull-right category-btn" type="submit"><i class="icon-plus"></i></button>
+			</form>
+		</li>
+	</ul>
+	
+</div>

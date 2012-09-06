@@ -3,27 +3,27 @@
 angular.module("shopping-app", ["shoppingService"])
 	.config(["$routeProvider", function ($routeProvider) {
 	    $routeProvider
-	            .when("/element/list", {templateUrl:"views/element-list.html", controller:MainController})
+	            .when("/product/list", {templateUrl:"views/product-list.html", controller:MainController})
 	            .when("/about", {templateUrl:"views/about.html", controller:AboutController})
-	            .otherwise({redirectTo:"/element/list"});
+	            .otherwise({redirectTo:"/product/list"});
 	}])
-	.filter("filterElementsInCategory", function() {
-		return function(elements, category) {
+	.filter("filterProductsInCategory", function() {
+		return function(products, category) {
 			var filtered = [];
-			for (var i = 0; i < elements.length; i++) {
-				var element = elements[i];
-				var c = element.category;
+			for (var i = 0; i < products.length; i++) {
+				var product = products[i];
+				var c = product.category;
 				if (c.id == category.id)
-					filtered.push(element);
+					filtered.push(product);
 			}
 			return filtered;
 		}
 	});
 
-var MainController = function($scope, $location, $rootElement, Category, Element) {
+var MainController = function($scope, $location, $rootElement, Category, Product) {
 	$scope.categories = Category.query();
-	$scope.elements = Element.query();
-	$scope.editedElement = null;
+	$scope.products = Product.query();
+	$scope.editedProduct = null;
 	
 	$scope.addCategory = function() {
 		Category.create($scope.newCategory, function() {
@@ -39,38 +39,38 @@ var MainController = function($scope, $location, $rootElement, Category, Element
 			});
 	};
 	
-	$scope.enableEditingMode = function(element) {
-		if ($scope.editedElement != null)
-			$scope.saveElement($scope.editedElement);
-		$scope.editedElement = element;
+	$scope.enableEditingMode = function(product) {
+		if ($scope.editedProduct != null)
+			$scope.saveProduct($scope.editedProduct);
+		$scope.editedProduct = product;
 	};
 	
-	$scope.saveElement = function(element) {
-		element.$save({id: element.id});
-		$scope.editedElement = null;
+	$scope.saveProduct = function(product) {
+		product.$save({id: product.id});
+		$scope.editedProduct = null;
 	};
 	
-	$scope.deleteElement = function(element) {
-		if (confirm("The element " + element.name + " will be deleted. Are you sure?"))
-			element.$delete({id: element.id}, function() {
-				$scope.elements = Element.query();
+	$scope.deleteProduct = function(product) {
+		if (confirm("The product " + product.name + " will be deleted. Are you sure?"))
+			product.$delete({id: product.id}, function() {
+				$scope.products = Product.query();
 			});
 	}
 }
 
-var CategoryController = function($scope, Category, Element) {
-	$scope.newElement = null;
+var CategoryController = function($scope, Category, Product) {
+	$scope.newProduct = null;
 	
-	$scope.addElementInCategory = function(category) {
-		$scope.newElement.category = category;
-		Element.create($scope.newElement, function() {
-			$scope.elements = Element.query();
+	$scope.addProductInCategory = function(category) {
+		$scope.newProduct.category = category;
+		Product.create($scope.newProduct, function() {
+			$scope.products = Product.query();
 		});
-		$scope.newElement = null;
+		$scope.newProduct = null;
 	};
 }
 
-var ElementController = function($scope, Category, Element) {
+var ProductController = function($scope, Category, Product) {
 	
 }
 

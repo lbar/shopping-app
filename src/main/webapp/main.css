@@ -30,14 +30,14 @@ label.inline {
 	margin-bottom: 4px;
 }
 
-.element-list li {
+.product-list li {
 	line-height: 34px;
 }
 
-.element-list li .element-btn, .category-list li .category-btn {
+.product-list li .product-btn, .category-list li .category-btn {
 	display: none;
 }
 
-.element-list li:hover .element-btn, .category-list li:hover .category-btn {
+.product-list li:hover .product-btn, .category-list li:hover .category-btn {
 	display: inline;
 }

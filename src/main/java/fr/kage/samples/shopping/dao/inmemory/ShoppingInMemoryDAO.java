@@ -7,48 +7,48 @@ import java.util.concurrent.ConcurrentHashMap;
 import fr.kage.samples.shopping.dao.ShoppingDAO;
 import fr.kage.samples.shopping.dao.ShoppingDAOException;
 import fr.kage.samples.shopping.model.Category;
-import fr.kage.samples.shopping.model.Element;
+import fr.kage.samples.shopping.model.Product;
 
 public class ShoppingInMemoryDAO implements ShoppingDAO {
 	
-	private ConcurrentHashMap<Long, Element> elements = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<Long, Product> products = new ConcurrentHashMap<>();
 	private ConcurrentHashMap<Long, Category> categories = new ConcurrentHashMap<>();
 	
 	@Override
-	public List<Element> listElements() {
-		return new ArrayList<>(elements.values());
+	public List<Product> listProducts() {
+		return new ArrayList<>(products.values());
 	}
 
 	@Override
-	public void addElement(Element element) {
-		if (element.getId() != null)
-			throw new ShoppingDAOException("Error: try to insert a element with id <" + element.getId() + ">");
+	public void addProduct(Product product) {
+		if (product.getId() != null)
+			throw new ShoppingDAOException("Error: try to insert a product with id <" + product.getId() + ">");
 		
-		element.setId(nextElementId());
-		elements.put(element.getId(), element);
+		product.setId(nextProductId());
+		products.put(product.getId(), product);
 	}
 
-	private Long nextElementId() {
+	private Long nextProductId() {
 		long max = 0;
-		for (Long currentId : elements.keySet())
+		for (Long currentId : products.keySet())
 			max = Math.max(max, currentId);
 		return max + 1;
 	}
 
 	@Override
-	public void updateElement(long id, Element element) {
-		if (!elements.containsKey(id))
-			throw new ShoppingDAOException("Error: try to update a non-existent element with id <" + id + ">");
+	public void updateProduct(long id, Product product) {
+		if (!products.containsKey(id))
+			throw new ShoppingDAOException("Error: try to update a non-existent product with id <" + id + ">");
 		
-		elements.put(id, element);
+		products.put(id, product);
 	}
 
 	@Override
-	public void deleteElement(long id) {
-		if (!elements.containsKey(id))
-			throw new ShoppingDAOException("Error: try to delete a non-existent element with id <" + id + ">");
+	public void deleteProduct(long id) {
+		if (!products.containsKey(id))
+			throw new ShoppingDAOException("Error: try to delete a non-existent product with id <" + id + ">");
 		
-		elements.remove(id);
+		products.remove(id);
 	}
 
 	@Override

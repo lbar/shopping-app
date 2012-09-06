@@ -11,8 +11,8 @@ import com.google.common.base.Objects;
 import com.google.common.hash.HashCodes;
 
 @Entity
-@Table(name="element")
-public class Element {
+@Table(name="product")
+public class Product {
 
 	@Id
 	@GeneratedValue
@@ -59,8 +59,8 @@ public class Element {
 		if (obj == this)
 			return true;
 		
-		if (obj instanceof Element) {
-			Element other = (Element) obj;
+		if (obj instanceof Product) {
+			Product other = (Product) obj;
 			return getId() == other.getId()
 					&& Objects.equal(getName(), other.getName())
 					&& getAmount() == other.getAmount()
@@ -76,7 +76,7 @@ public class Element {
 	
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(Element.class)
+		return Objects.toStringHelper(Product.class)
 				.add("id", getId())
 				.add("name", getName())
 				.add("amount", getAmount())
@@ -84,7 +84,7 @@ public class Element {
 				.toString();
 	}
 	
-	public void updateFrom(Element other) {
+	public void updateFrom(Product other) {
 		setName(other.getName());
 		setAmount(other.amount);
 		setCategory(other.category);

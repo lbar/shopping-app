@@ -17,7 +17,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import fr.kage.samples.shopping.model.Category;
-import fr.kage.samples.shopping.model.Element;
+import fr.kage.samples.shopping.model.Product;
 
 public class ShoppingInMemoryDAOTest {
 	
@@ -29,55 +29,55 @@ public class ShoppingInMemoryDAOTest {
 	}
 
 	@Test
-	public void testListElements() {
+	public void testListProducts() {
 		{
-			List<Element> first = shoppingInMemoryDAO.listElements();
+			List<Product> first = shoppingInMemoryDAO.listProducts();
 			assertTrue(first.isEmpty());
 		}
 		{
-			shoppingInMemoryDAO.addElement(newElement());
-			shoppingInMemoryDAO.addElement(newElement());
+			shoppingInMemoryDAO.addProduct(newProduct());
+			shoppingInMemoryDAO.addProduct(newProduct());
 			
-			List<Element> second = shoppingInMemoryDAO.listElements();
+			List<Product> second = shoppingInMemoryDAO.listProducts();
 			assertFalse(second.isEmpty());
 			assertEquals(2, second.size());
 		}
 	}
 	
 	@Test
-	public void testAddElement() {
-		assertTrue(shoppingInMemoryDAO.listElements().isEmpty());
+	public void testAddProduct() {
+		assertTrue(shoppingInMemoryDAO.listProducts().isEmpty());
 		{
-			Element added = newElement();
-			shoppingInMemoryDAO.addElement(added);
-			assertEquals(added, shoppingInMemoryDAO.listElements().get(0));
+			Product added = newProduct();
+			shoppingInMemoryDAO.addProduct(added);
+			assertEquals(added, shoppingInMemoryDAO.listProducts().get(0));
 		}
 	}
 	
 	@Test
-	public void testEditElement() {
-		Element added = newElement();
-		shoppingInMemoryDAO.addElement(added);
-		assertEquals(added, shoppingInMemoryDAO.listElements().get(0));
+	public void testEditProduct() {
+		Product added = newProduct();
+		shoppingInMemoryDAO.addProduct(added);
+		assertEquals(added, shoppingInMemoryDAO.listProducts().get(0));
 		
-		Element modified = newElement();
+		Product modified = newProduct();
 		assertNotSame(modified, added);
-		shoppingInMemoryDAO.updateElement(1, modified);
-		assertEquals(modified, shoppingInMemoryDAO.listElements().get(0));
+		shoppingInMemoryDAO.updateProduct(1, modified);
+		assertEquals(modified, shoppingInMemoryDAO.listProducts().get(0));
 	}
 	
 	@Test
-	public void testDeleteElement() {
-		Element added = newElement();
-		shoppingInMemoryDAO.addElement(added);
-		assertEquals(added, shoppingInMemoryDAO.listElements().get(0));
+	public void testDeleteProduct() {
+		Product added = newProduct();
+		shoppingInMemoryDAO.addProduct(added);
+		assertEquals(added, shoppingInMemoryDAO.listProducts().get(0));
 		
-		shoppingInMemoryDAO.deleteElement(1);
-		assertTrue(shoppingInMemoryDAO.listElements().isEmpty());
+		shoppingInMemoryDAO.deleteProduct(1);
+		assertTrue(shoppingInMemoryDAO.listProducts().isEmpty());
 	}
 	
-	static Element newElement() {
-		final Element mocked = mock(Element.class);
+	static Product newProduct() {
+		final Product mocked = mock(Product.class);
 		doAnswer(new Answer<Void>() {
 			@Override
 			public Void answer(InvocationOnMock invocation) throws Throwable {

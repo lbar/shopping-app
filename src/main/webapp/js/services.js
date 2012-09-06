@@ -7,8 +7,8 @@ angular.module("shoppingService", ["ngResource"])
                 "save": {method:"PUT"}
             });
         })
-        .factory("Element", function ($resource) {
-            return $resource("api/element/:id", {}, {
+        .factory("Product", function ($resource) {
+            return $resource("api/product/:id", {}, {
             	"create": {method: "POST"},
                 "save": {method:"PUT"}
             });

@@ -15,7 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.kage.samples.shopping.model.Category;
-import fr.kage.samples.shopping.model.Element;
+import fr.kage.samples.shopping.model.Product;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-context.xml"})
@@ -34,60 +34,59 @@ public class ShoppingDBDAOTest {
 	}
 	
 	@Test
-	public void testListElements() {
+	public void testListProducts() {
 		{
-			List<Element> first = shoppingDBDAO.listElements();
+			List<Product> first = shoppingDBDAO.listProducts();
 			assertTrue(first.isEmpty());
 		}
 		{
-			shoppingDBDAO.addElement(newElement("product1", 2));
-			shoppingDBDAO.addElement(newElement("product2", 5));
+			shoppingDBDAO.addProduct(newProduct("product1", 2));
+			shoppingDBDAO.addProduct(newProduct("product2", 5));
 			
-			List<Element> second = shoppingDBDAO.listElements();
+			List<Product> second = shoppingDBDAO.listProducts();
 			assertFalse(second.isEmpty());
 			assertEquals(2, second.size());
 		}
 	}
 	
 	@Test
-	public void testAddElement() {
-		assertTrue(shoppingDBDAO.listElements().isEmpty());
+	public void testAddProduct() {
+		assertTrue(shoppingDBDAO.listProducts().isEmpty());
 		{
-			Element added = newElement("product", 3);
-			shoppingDBDAO.addElement(added);
-			assertEquals(added, shoppingDBDAO.listElements().get(0));
+			Product added = newProduct("product", 3);
+			shoppingDBDAO.addProduct(added);
+			assertEquals(added, shoppingDBDAO.listProducts().get(0));
 		}
 	}
 	
 	@Test
-	public void testEditElement() {
-		Element added = newElement("product1", 4);
-		shoppingDBDAO.addElement(added);
-		assertEquals(added, shoppingDBDAO.listElements().get(0));
+	public void testEditProduct() {
+		Product added = newProduct("product1", 4);
+		shoppingDBDAO.addProduct(added);
+		assertEquals(added, shoppingDBDAO.listProducts().get(0));
 		
-		Element modified = newElement("product2", 2);
+		Product modified = newProduct("product2", 2);
 		modified.setId(added.getId());
 		assertNotSame(modified, added);
-		shoppingDBDAO.updateElement(added.getId(), modified);
-		assertEquals(modified, shoppingDBDAO.listElements().get(0));
+		shoppingDBDAO.updateProduct(added.getId(), modified);
+		assertEquals(modified, shoppingDBDAO.listProducts().get(0));
 	}
 	
 	@Test
-	public void testDeleteElement() {
-		Element added = newElement("product1", 4);
-		shoppingDBDAO.addElement(added);
-		assertEquals(added, shoppingDBDAO.listElements().get(0));
+	public void testDeleteProduct() {
+		Product added = newProduct("product1", 4);
+		shoppingDBDAO.addProduct(added);
+		assertEquals(added, shoppingDBDAO.listProducts().get(0));
 		
-		System.out.println("Delete element with id: " + added.getId());
-		shoppingDBDAO.deleteElement(added.getId());
+		shoppingDBDAO.deleteProduct(added.getId());
 		{
-			List<Element> allElements = shoppingDBDAO.listElements();
-			assertTrue(allElements.isEmpty());
+			List<Product> allProducts = shoppingDBDAO.listProducts();
+			assertTrue(allProducts.isEmpty());
 		}
 	}
 	
-	static Element newElement(String name, int amount) {
-		final Element mocked = new Element();
+	static Product newProduct(String name, int amount) {
+		final Product mocked = new Product();
 		mocked.setName(name);
 		mocked.setAmount(amount);
 		return mocked;
@@ -138,7 +137,6 @@ public class ShoppingDBDAOTest {
 		shoppingDBDAO.addCategory(added);
 		assertEquals(added, shoppingDBDAO.listCategories().get(0));
 		
-		System.out.println("Delete category with id: " + added.getId());
 		shoppingDBDAO.deleteCategory(added.getId());
 		{
 			List<Category> allCategories = shoppingDBDAO.listCategories();

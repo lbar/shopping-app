@@ -13,7 +13,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 import fr.kage.samples.shopping.dao.ShoppingDAO;
 import fr.kage.samples.shopping.model.Category;
-import fr.kage.samples.shopping.model.Element;
+import fr.kage.samples.shopping.model.Product;
 
 @Repository("shoppingDAO")
 @Transactional
@@ -28,34 +28,34 @@ public class ShoppingDBDAO implements ShoppingDAO {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Element> listElements() {
-		return session.createCriteria(Element.class).list();
+	public List<Product> listProducts() {
+		return session.createCriteria(Product.class).list();
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public void addElement(Element element) {
-		session.save(element);
+	public void addProduct(Product product) {
+		session.save(product);
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public void updateElement(long id, Element element) {
-		Element toUpdate = getElementById(id);
-		toUpdate.updateFrom(element);
+	public void updateProduct(long id, Product product) {
+		Product toUpdate = getProductById(id);
+		toUpdate.updateFrom(product);
 		session.update(toUpdate);
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public void deleteElement(long id) {
+	public void deleteProduct(long id) {
 		Transaction tx = session.beginTransaction();
-		session.delete(getElementById(id));
+		session.delete(getProductById(id));
 		tx.commit();
 	}
 
-	private Element getElementById(long id) {
-		return (Element) session.load(Element.class, id);
+	private Product getProductById(long id) {
+		return (Product) session.load(Product.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -92,7 +92,7 @@ public class ShoppingDBDAO implements ShoppingDAO {
 	@VisibleForTesting
 	public void cleanAllEntities() {
 		Transaction tx = session.beginTransaction();
-		session.createQuery("DELETE FROM Element").executeUpdate();
+		session.createQuery("DELETE FROM Product").executeUpdate();
 		session.createQuery("DELETE FROM Category").executeUpdate();
 		tx.commit();
 	}

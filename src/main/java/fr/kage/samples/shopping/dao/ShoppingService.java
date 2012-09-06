@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import fr.kage.samples.shopping.model.Category;
-import fr.kage.samples.shopping.model.Element;
+import fr.kage.samples.shopping.model.Product;
 
 @Service("shoppingService")
 public class ShoppingService {
@@ -15,20 +15,20 @@ public class ShoppingService {
 	@Resource(name="shoppingDAO")
 	private ShoppingDAO shoppingDAO;
 	
-	public List<Element> listElements() {
-		return shoppingDAO.listElements();
+	public List<Product> listProducts() {
+		return shoppingDAO.listProducts();
 	}
 	
-	public void addElement(Element element) {
-		shoppingDAO.addElement(element);
+	public void addProduct(Product product) {
+		shoppingDAO.addProduct(product);
 	}
 	
-	public void updateElement(long id, Element element) {
-		shoppingDAO.updateElement(id, element);
+	public void updateProduct(long id, Product product) {
+		shoppingDAO.updateProduct(id, product);
 	}
 	
-	public void deleteElement(long id) {
-		shoppingDAO.deleteElement(id);
+	public void deleteProduct(long id) {
+		shoppingDAO.deleteProduct(id);
 	}
 	
 	public List<Category> listCategories() {
